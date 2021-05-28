@@ -77,7 +77,7 @@
     initAccordion(){
       const thisProduct = this;
       // const firstArticle = document.querySelector('article');
-      const clickableTrigger = document.querySelector(select.menuProduct.clickable);
+      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
 
       clickableTrigger.addEventListener('click', function(event) {
         event.preventDefault();
