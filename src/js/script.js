@@ -1,6 +1,6 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
-const { active } = require("browser-sync");
+// const { active } = require("browser-sync");
 
 {
   'use strict';
@@ -76,22 +76,22 @@ const { active } = require("browser-sync");
 
     initAccordion(){
       const thisProduct = this;
-
-      const clickableTrigger = document.querySelector(select.product__header);
+      // const firstArticle = document.querySelector('article');
+      const clickableTrigger = document.querySelector(select.menuProduct.clickable);
 
       clickableTrigger.addEventListener('click', function(event) {
         event.preventDefault();
         /* find active product (product that has active class) */
-        const activeProduct = document.querySelector(select.menuProductsActive);
+        const activeProduct = document.querySelector(select.menuProduct.clickable);
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         if (activeProduct != thisProduct.element) {
-          activeProduct.classList.remove('active')
-        };
+          activeProduct.classList.remove('active');
+        }
         /* toggle active class on thisProduct.element */
         thisProduct.element.classList.toggle('active');
-      })
+      });
     }
-  };
+  }
 
   const app = {
     initMenu: function(){
