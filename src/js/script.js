@@ -33,14 +33,14 @@
       },
     },
   };
-
+  /*eslint-disable */
   const classNames = {
     menuProduct: {
       wrapperActive: 'active',
       imageVisible: 'active',
     },
   };
-
+  
   const settings = {
     amountWidget: {
       defaultValue: 1,
@@ -48,7 +48,7 @@
       defaultMax: 9,
     }
   };
-
+  /*eslint-enable */
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
@@ -84,6 +84,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imagesWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -128,7 +129,7 @@
       // console.log('processOrder');
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData:', formData);
+      // console.log('formData:', formData);
       
       // set price to default price
       let price = thisProduct.data.price;
@@ -144,19 +145,26 @@
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
           // console.log(optionId, option);
-          if (formData[paramId] && formData[paramId].includes(optionId)) {
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          if (optionSelected) {
             if (option.default){
-            price;
+              price;
             } else if (!option.default){
-            price = price + option.price;
+              price = price + option.price;
             }
-          
           } else {
             if (option.default){
               price = price - option.price;
             }
+          };
+          const optionImage = thisProduct.imagesWrapper.querySelector('.' + paramId + '-' + optionId);
+          if (optionImage) {
+            if (optionSelected) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            } else {
+            optionImage.classList.remove(classNames.menuProduct.imageVisible)
+            }
           }
-          
         }
       }
       thisProduct.priceElem.innerHTML = price;
