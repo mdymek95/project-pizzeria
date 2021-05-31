@@ -156,13 +156,13 @@
             if (option.default){
               price = price - option.price;
             }
-          };
+          }
           const optionImage = thisProduct.imagesWrapper.querySelector('.' + paramId + '-' + optionId);
           if (optionImage) {
             if (optionSelected) {
               optionImage.classList.add(classNames.menuProduct.imageVisible);
             } else {
-            optionImage.classList.remove(classNames.menuProduct.imageVisible)
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
         }
