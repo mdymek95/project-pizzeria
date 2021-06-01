@@ -294,14 +294,14 @@
       thisCart.dom = {};
 
       thisCart.dom.wrapper = element;
-      thisCart.dom.toogleTrigger = element.querySelector(select.cart.toogleTrigger);
+      thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
     }
 
     initActions(){
       const thisCart = this;
 
-      thisCart.dom.toogleTrigger.addEventListener('click', function(){
-        thisCart.dom.wrapper.classList.toogle(classNames.cart.wrapperActive);
+      thisCart.dom.toggleTrigger.addEventListener('click', function(){
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
     }
   }
