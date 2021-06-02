@@ -237,7 +237,7 @@
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
 
-      const params = {}
+      const params = {};
 
       // for every category (param)...
       for(let paramId in thisProduct.data.params) {
@@ -247,19 +247,18 @@
         params[paramId] = {
           label: param.label,
           options: {}
-        }
-        // console.log(paramId, param);
+        };
+        console.log(params);
         
         // for every option in this category
         for(let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
+
           // console.log(optionId, option);
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
           if (optionSelected) {
-            params[optionSelected] = {
-              options: {option}  
-            }
+            params[paramId].options = option.label;
           }
         }
       }
@@ -273,10 +272,11 @@
 
       // console.log('AmountWidget:', thisWidget);
       // console.log('constructor arguments:', element);
-
+      thisWidget.value = settings.amountWidget.defaultValue;
       thisWidget.getElements(element);
       thisWidget.initActions(element);
-      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.input.value = settings.amountWidget.defaultValue;
+      thisWidget.setValue(thisWidget.value);
     }
 
     getElements(element){
@@ -292,13 +292,14 @@
       const thisWidget = this;
 
       const newValue = parseInt(value);
-      thisWidget.value = settings.amountWidget.defaultValue;
       // TODO: Add validation
 
-      // thisWidget.value = newValue;
-      // thisWidget.input.value = thisWidget.value;
-
-      if(thisWidget.value !== newValue && !isNaN(newValue) && settings.amountWidget.defaultMin <= newValue && settings.amountWidget.defaultMax >= newValue){
+      if(
+        thisWidget.value !== newValue
+        && !isNaN(newValue)
+        && settings.amountWidget.defaultMin <= newValue
+        && settings.amountWidget.defaultMax >= newValue
+        ){
         // if(isNaN(newValue))
         thisWidget.value = newValue;
         thisWidget.input.value = thisWidget.value; 
