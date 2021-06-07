@@ -1,5 +1,7 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
+// const { utils } = require("stylelint");
+
 
 {
   'use strict';
@@ -248,7 +250,7 @@
           label: param.label,
           options: {}
         };
-        console.log(params);
+        console.log('params:', params);
         
         // for every option in this category
         for(let optionId in param.options) {
@@ -299,7 +301,7 @@
         && !isNaN(newValue)
         && settings.amountWidget.defaultMin <= newValue
         && settings.amountWidget.defaultMax >= newValue
-        ){
+      ){
         // if(isNaN(newValue))
         thisWidget.value = newValue;
         thisWidget.input.value = thisWidget.value; 
@@ -353,6 +355,7 @@
 
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = element.querySelector(select.cart.productList);
     }
 
     initActions(){
@@ -364,8 +367,11 @@
     }
 
     add(menuProduct){
-      // const thisCart = this;
-
+      const thisCart = this;
+      const generatedHTML = templates.cartProduct(menuProduct);
+      // console.log(generatedHTML);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(generatedDOM);
       console.log('adding product', menuProduct);
     }
   }
