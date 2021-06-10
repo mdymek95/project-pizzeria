@@ -1,5 +1,7 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
+// const { formatters } = require("stylelint");
+
 // const { utils } = require("stylelint");
 
 
@@ -344,10 +346,9 @@
       thisCart.products = [];
 
       thisCart.getElements(element);
-      thisCart.initActions(element);
       
+      thisCart.initActions(element);
 
-      // console.log('new Cart:', thisCart);
     }
 
     getElements(element){
@@ -369,6 +370,9 @@
 
       thisCart.dom.toggleTrigger.addEventListener('click', function(){
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+      });
+      thisCart.dom.productList.addEventListener('updated', function(){
+        thisCart.update();
       });
     }
 
@@ -408,7 +412,10 @@
 
       thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
       thisCart.dom.subTotalPrice.innerHTML = thisCart.subTotalPrice;
-      thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+      // thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+      for(let price of thisCart.dom.totalPrice){
+        price.innerHTML = thisCart.totalPrice;
+      }
       console.log('thisCart:', thisCart);
     }
   }
