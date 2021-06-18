@@ -550,7 +550,7 @@
     getData(){
       const thisCartProduct = this;
 
-      const miniProduct = {
+      return {
         id: thisCartProduct.id,
         name: thisCartProduct.name,
         amount: thisCartProduct.amount,
@@ -558,7 +558,7 @@
         price: thisCartProduct.price,
         params: thisCartProduct.params
       };
-      console.log('miniProduct:', miniProduct);
+      
     }
   }
   
