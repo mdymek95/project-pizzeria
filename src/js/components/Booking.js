@@ -65,10 +65,10 @@ class Booking{
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        // console.log(bookings);
-        // console.log(eventsCurrent);
-        // console.log(eventsRepeat);
-        thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
+        console.log(bookings);
+        console.log(eventsCurrent);
+        console.log(eventsRepeat);
+        // thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
 
@@ -82,11 +82,11 @@ class Booking{
   //   }
   // }
 
-  makeBooked(date, hour, duration, table){
-    const thisBooking = this;
+  // makeBooked(date, hour, duration, table){
+  //   const thisBooking = this;
 
-    thisBooking.booked[date][hour].push(table);
-  }
+  //   thisBooking.booked[date][hour].push(table);
+  // }
 
   render(element){
     const thisBooking = this;

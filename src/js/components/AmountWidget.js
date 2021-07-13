@@ -38,6 +38,24 @@ class AmountWidget extends BaseWidget{
     thisWidget.dom.input.value = thisWidget.correctValue;
   }
 
+  setValue(value){
+    const thisWidget = this;
+
+    const newValue = parseInt(value);
+
+    if(
+      thisWidget.value !== newValue
+      && !isNaN(newValue)
+      && settings.amountWidget.defaultMin <= newValue
+      && settings.amountWidget.defaultMax >= newValue
+    ){
+      // if(isNaN(newValue))
+      thisWidget.value = newValue; 
+    }
+    thisWidget.input.value = thisWidget.value;
+    thisWidget.announce();
+  }
+
   initActions(){
     const thisWidget = this;
 

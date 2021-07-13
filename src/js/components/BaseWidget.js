@@ -25,10 +25,10 @@ class BaseWidget {
     {
       // if(isNaN(newValue))
       thisWidget.correctValue = newValue;
-      
+      thisWidget.announce();
     }
     thisWidget.renderValue();
-    thisWidget.announce();
+    
   }
 
   setValue(value){
