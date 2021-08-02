@@ -52,7 +52,7 @@ class AmountWidget extends BaseWidget{
       // if(isNaN(newValue))
       thisWidget.value = newValue; 
     }
-    thisWidget.input.value = thisWidget.value;
+    // thisWidget.input.value = thisWidget.value;
     thisWidget.announce();
   }
 
