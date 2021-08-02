@@ -23,7 +23,6 @@ class BaseWidget {
       thisWidget.correctValue !== newValue
       && thisWidget.isValid(value));
     {
-      // if(isNaN(newValue))
       thisWidget.correctValue = newValue;
       thisWidget.announce();
     }

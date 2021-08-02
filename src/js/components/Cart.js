@@ -52,22 +52,16 @@ class Cart{
   add(menuProduct){
     const thisCart = this;
     const generatedHTML = templates.cartProduct(menuProduct);
-    // console.log(generatedHTML);
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
     thisCart.dom.productList.appendChild(generatedDOM);
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
     thisCart.update();
-    // console.log('adding product', menuProduct);
-    // console.log('thisCart.products:', thisCart.products);
   }
 
   update(){
     const thisCart = this;
-    // create const with information about delivery price
-    thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
-
-    // create const with total number of orders and second const with price without deliveryfee
-    thisCart.totalNumber = 0; // dlaczego piszą żeby zrobić stała a ten zapis jest prawidłowy
+    thisCart.deliveryFee = settings.cart.defaultDeliveryFee;  
+    thisCart.totalNumber = 0;
     thisCart.subTotalPrice = 0;
     for(let product of thisCart.products) {
       thisCart.totalNumber = thisCart.totalNumber + product.amount;
@@ -81,15 +75,12 @@ class Cart{
       thisCart.totalPrice = 0;
       thisCart.dom.deliveryFee.innerHTML = 0;
     }
-    // console.log('thisCart.totalPrice', thisCart.totalPrice);
 
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
     thisCart.dom.subTotalPrice.innerHTML = thisCart.subTotalPrice;
-    // thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
     for(let price of thisCart.dom.totalPrice){
       price.innerHTML = thisCart.totalPrice;
-    } //dlaczego trzeba robić pętle
-    // console.log('thisCart:', thisCart.products);
+    }
   }
 
   remove(CartProduct){

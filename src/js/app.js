@@ -28,13 +28,10 @@ const app = {
         const clickedElement = this;
         event.preventDefault();
 
-        // get page id from href attribute
         const id = clickedElement.getAttribute('href').replace('#', '');
 
-        // run thisApp.activatePage with that id
         thisApp.activatePage(id);
 
-        // change URL hash
         window.location.hash = '#/' + id;
       });
     }
@@ -43,13 +40,10 @@ const app = {
   activatePage: function(pageId){
     const thisApp = this;
 
-    // add class active to matching pages, remove from non-matching
     for(let page of thisApp.pages){
       page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
 
-
-    // add class active to matching links, remove from non-matching
     for(let link of thisApp.navLinks){
       link.classList.toggle(
         classNames.nav.active,
@@ -61,7 +55,6 @@ const app = {
   initMenu: function(){
     const thisApp = this;
 
-    // console.log('thisApp.data:', thisApp.data);
     for(let productData in thisApp.data.products){
       new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
     }
@@ -78,13 +71,9 @@ const app = {
         return rawResponse.json();
       })
       .then(function(parsedResponse){
-        // console.log('parsedResponse', parsedResponse);
         thisApp.data.products = parsedResponse;
         thisApp.initMenu();
       });
-      
-
-    // console.log('thisApp.data', JSON.stringify(thisApp.data));
   },
 
   initCart: function(){
@@ -109,16 +98,10 @@ const app = {
 
   init: function(){
     const thisApp = this;
-    // console.log('*** App starting ***');
-    // console.log('thisApp:', thisApp);
-    // console.log('classNames:', classNames);
-    // console.log('settings:', settings);
-    // console.log('templates:', templates);
-
+    
     thisApp.initPages();
 
     thisApp.initData();
-    // thisApp.initMenu();
     thisApp.initCart();
     thisApp.initBooking();
   },

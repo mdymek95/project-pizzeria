@@ -135,8 +135,6 @@ class Product{
   addToCart(){
     const thisProduct = this;
 
-    //   app.cart.add(thisProduct.prepareCartProduct());
-
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,
       detail: {
@@ -164,27 +162,21 @@ class Product{
 
   prepareCartProductParams(){
     const thisProduct = this;
-    // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
     const formData = utils.serializeFormToObject(thisProduct.form);
 
     const params = {};
 
-    // for every category (param)...
+
     for(let paramId in thisProduct.data.params) {
-      // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
       const param = thisProduct.data.params[paramId];      
       params[paramId] = {
         label: param.label,
         options: {}
       };
-      // console.log('params:', params);
         
-      // for every option in this category
       for(let optionId in param.options) {
-        // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
         const option = param.options[optionId];
 
-        // console.log(optionId, option);
         const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
         if (optionSelected) {
           params[paramId].options[optionId] = option.label;
